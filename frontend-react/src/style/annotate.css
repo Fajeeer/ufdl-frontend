@@ -37,6 +37,7 @@
   margin: auto;
   width: 90%;
   height: 90%;
+  margin-top:30px;
 }
 
 /* This is to be used if we are not using the library. Remove it if the library's use if finalised. */
@@ -50,6 +51,6 @@ img {
 }
 
 .selectForm {
-  padding-top: 25px;
+  margin-top: 20%;
   padding-bottom: 20px;
 }
