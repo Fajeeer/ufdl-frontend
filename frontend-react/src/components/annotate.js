@@ -3,7 +3,8 @@ import ReactImageAnnotate from "react-image-annotate";
 import '../style/annotate.css';
 
 class Annotate extends Component {
-
+    // TODO: Allow the annotator to retain the annotation regions and tags upon new image uploads
+    //       Uploading new images currently recreates the annotator and the annotations are cleared
     state = {
         data: [],
         uploaded: false
@@ -28,17 +29,18 @@ class Annotate extends Component {
         if(uploaded){
           return (
               <div className="border">
-                  <form className="selectForm" onSubmit={this._handleSubmit}>
+                  <form className="selectForm">
                     <input type="file" id="file" multiple={true} accept="image/*" className="fileInputButton" onChange={this.fileSelectedHandler} />
                     <label htmlFor="file" className="fileLabel">
                       Add Images
                     </label>
                   </form>
                 <div className="imageDisplay">
+
                   <ReactImageAnnotate
                     images= {data}
                     key = {data}
-                    regionClsList={[]}
+                    regionClsList={["kiwi", "leaf"]}
                     enabledTools="create-polygon, create-box"
                     onExit={output => {
                       console.log(JSON.stringify(output.images));
@@ -55,7 +57,7 @@ class Annotate extends Component {
          
                   <div className="imageDisplay">
       
-                    <form className="selectForm" onSubmit={this._handleSubmit}>
+                    <form className="selectForm" id="formUpload">
                         <input type="file" id="file" multiple={true} accept="image/*" className="fileInputButton" onChange={this.fileSelectedHandler} />
                         <label htmlFor="file" className="fileLabel">
                             Upload Images
