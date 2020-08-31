@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactImageAnnotate from "react-image-annotate";
 import '../style/annotate.css';
 
-// TODO: this needs to be cleaned up
 class Annotate extends Component {
 
     state = {
@@ -19,7 +18,7 @@ class Annotate extends Component {
         images.push({src: img.src, name: files[i].name});  
     }
 
-    this.setState({data: images});
+    this.setState({data: this.state.data.concat(images)});
     this.setState({uploaded: true});
   }    
 
@@ -29,15 +28,20 @@ class Annotate extends Component {
         if(uploaded){
           return (
               <div className="border">
-      
+                  <form className="selectForm" onSubmit={this._handleSubmit}>
+                    <input type="file" id="file" multiple={true} accept="image/*" className="fileInputButton" onChange={this.fileSelectedHandler} />
+                    <label htmlFor="file" className="fileLabel">
+                      Add Images
+                    </label>
+                  </form>
                 <div className="imageDisplay">
                   <ReactImageAnnotate
-                    taskDescription="# Draw region around each Kiwifruit bunch"
-                    images= {data} 
-                    regionClsList={["kiwi fruit", "leaf"]}
+                    images= {data}
+                    key = {data}
+                    regionClsList={[]}
                     enabledTools="create-polygon, create-box"
                     onExit={output => {
-                      console.log(JSON.stringify(output));
+                      console.log(JSON.stringify(output.images));
                     }}
                   />
 
